@@ -7,8 +7,8 @@ module.exports = {
     },
 
     extend: {
-      backgroundColor: {
-        primary: "#111111",
+      minHeight: {
+        "vh-164": "calc(100vh - 164px)",
       },
     },
   },
