@@ -9,8 +9,12 @@ module.exports = {
     extend: {
       minHeight: {
         "vh-164": "calc(100vh - 164px)",
+        "vh-chat": "calc(100vh - 260px)",
+      },
+      maxHeight: {
+        "chat-area": "calc(100vh - 356px)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
 };
