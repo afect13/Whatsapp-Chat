@@ -1,4 +1,4 @@
-const PhoneFrom = () => {
+const PhoneForm = () => {
   return (
     <div className=" flex flex-col  items-center">
       <div className="w-[320px]">
@@ -29,4 +29,4 @@ const PhoneFrom = () => {
   );
 };
 
-export default PhoneFrom;
+export default PhoneForm;
