@@ -7,13 +7,16 @@ import { useState } from "react";
 
 function App() {
   const [authData, setAuthData] = useState({ idInstance: "", apiToken: "" });
-
+  const [phoneNumber, setPhoneNumber] = useState("");
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<LoginForm authData={authData} setAuthData={setAuthData} />} />
-        <Route path="phone" element={<PhoneForm />} />
-        <Route path="chat/:phone" element={<Chat />} />
+        <Route
+          path="phone"
+          element={<PhoneForm authData={authData} phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} />}
+        />
+        <Route path="chat" element={<Chat authData={authData} phoneNumber={phoneNumber} />} />
         {/* <Route path="*" element={<NoMatch />} /> */}
       </Route>
     </Routes>

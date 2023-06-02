@@ -17,14 +17,12 @@ const LoginForm = ({ authData, setAuthData }) => {
     }
     setLoading(false);
   };
-
   const handleIdInstanceChange = (e) => {
-    setAuthData((prev) => ({ ...prev, idInstance: e.target.value }));
+    setAuthData((prev) => ({ ...prev, idInstance: e.target.value.trim() }));
   };
   const handleApiTokenChange = (e) => {
-    setAuthData((prev) => ({ ...prev, apiToken: e.target.value }));
+    setAuthData((prev) => ({ ...prev, apiToken: e.target.value.trim() }));
   };
-
   useEffect(() => {
     if (result === "authorized") {
       navigate("/phone");
