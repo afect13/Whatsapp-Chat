@@ -14,12 +14,7 @@ const Chat = ({ authData, phoneNumber }) => {
     try {
       while (!isUnmounted.current) {
         const notification = await receiveNotification(idInstance, apiToken);
-        if (notification === null) {
-          await new Promise((resolve) => setTimeout(resolve, 5000));
-          continue;
-        }
         if (notification?.body.typeWebhook === "incomingMessageReceived") {
-          console.log(notification);
           const newMessage = {
             id: notification.body.idMessage,
             message: notification.body.messageData.textMessageData.textMessage,
@@ -29,10 +24,25 @@ const Chat = ({ authData, phoneNumber }) => {
           };
           setMessages((prev) => [...prev, newMessage]);
           await deleteNotification(idInstance, apiToken, notification.receiptId);
-
           continue;
         }
-        if (notification?.body.typeWebhook !== "incomingMessageReceived" && notification !== null) {
+        if (notification?.body.typeWebhook === "outgoingAPIMessageReceived") {
+          const newMessage = {
+            id: notification.body.idMessage,
+            message: notification.body.messageData.extendedTextMessageData.text,
+            isUserMessage: false,
+            timestamp: notification.body.timestamp,
+            chatId: notification.body.senderData.chatId,
+          };
+          setMessages((prev) => [...prev, newMessage]);
+          await deleteNotification(idInstance, apiToken, notification.receiptId);
+          continue;
+        }
+        if (
+          notification?.body.typeWebhook !== "incomingMessageReceived" &&
+          notification !== null &&
+          notification?.body.typeWebhook !== "outgoingAPIMessageReceived"
+        ) {
           await deleteNotification(idInstance, apiToken, notification.receiptId);
           continue;
         }
@@ -44,19 +54,7 @@ const Chat = ({ authData, phoneNumber }) => {
   const handleSendMessage = async (messageText) => {
     const chatId = `${phoneNumber}@c.us`;
     console.log(messageText);
-    const sendId = await sendMessage(idInstance, apiToken, chatId, messageText);
-    if (sendId.idMessage) {
-      const date = new Date();
-      console.log(sendId);
-      const newMessage = {
-        id: sendId.idMessage,
-        message: messageText,
-        isUserMessage: false,
-        timestamp: Math.floor(date.getTime() / 1000),
-        chatId: chatId,
-      };
-      setMessages((prev) => [...prev, newMessage]);
-    }
+    await sendMessage(idInstance, apiToken, chatId, messageText);
   };
 
   useEffect(() => {

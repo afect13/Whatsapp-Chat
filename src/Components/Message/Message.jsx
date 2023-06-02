@@ -21,7 +21,7 @@ const Message = ({ isUserMessage, message, date }) => {
             <div className="pl-2">
               <small className="text-gray-500">
                 {year === currentYear && month === currentMonth && day === currentDay
-                  ? `${hours}:${minutes}`
+                  ? `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}`
                   : `${day < 10 ? `0${day}` : day}.${month < 10 ? `0${month}` : month}`}
               </small>
             </div>
@@ -36,7 +36,7 @@ const Message = ({ isUserMessage, message, date }) => {
             <div className="pr-2 ">
               <small className="text-gray-500">
                 {year === currentYear && month === currentMonth && day === currentDay
-                  ? `${hours}:${minutes}`
+                  ? `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}`
                   : `${day < 10 ? `0${day}` : day}.${month < 10 ? `0${month}` : month}`}
               </small>
             </div>

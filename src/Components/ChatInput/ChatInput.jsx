@@ -22,10 +22,11 @@ const ChatInput = ({ handleSendMessage }) => {
         <label htmlFor="chat" className="sr-only">
           Ваше сообщение
         </label>
-        <div className="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
+        <div className="flex items-center py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
           <input
             type="text"
             id="chat"
+            autoComplete="off"
             value={messageText}
             onChange={handleChange}
             placeholder="Ваше сообщение..."

@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <div className="flex flex-row min-h-[44px] my-7 max-w-[1000px] w-full mx-auto z-30">
-      <div className="flex items-center text-white ">
+      <div className="flex pl-4 lg:pl-0 items-center text-white ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
