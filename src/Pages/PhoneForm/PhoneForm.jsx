@@ -31,7 +31,11 @@ const PhoneForm = ({ authData, phoneNumber, setPhoneNumber }) => {
     if (result === true) {
       navigate("/chat");
     }
-  }, [result, navigate]);
+    if (!authData.idInstance || !authData.apiToken) {
+      navigate("/");
+    }
+  }, [result, authData, navigate]);
+
   return (
     <WrapperContainer>
       <AuthTitle text={"номер получателя"} />

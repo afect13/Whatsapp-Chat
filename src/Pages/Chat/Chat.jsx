@@ -5,11 +5,13 @@ import ChatTitle from "../../Components/ChatTitle/ChatTitle";
 import Message from "../../Components/Message/Message";
 import WrapperContainer from "../../Components/WrapperContainer/WrapperContainer";
 import { deleteNotification, receiveNotification, sendMessage } from "../../Api/api";
+import { useNavigate } from "react-router-dom";
 
 const Chat = ({ authData, phoneNumber }) => {
   const [messages, setMessages] = useState([]);
   const { idInstance, apiToken } = authData;
   const isUnmounted = useRef(false);
+  const navigate = useNavigate();
   const getAndDeleteNotification = async () => {
     try {
       while (!isUnmounted.current) {
@@ -62,6 +64,13 @@ const Chat = ({ authData, phoneNumber }) => {
       window.localStorage.setItem("messages", JSON.stringify(messages));
     }
   }, [messages]);
+  useEffect(() => {
+    if (!idInstance || !apiToken) {
+      navigate("/");
+    } else if (!phoneNumber) {
+      navigate("/phone");
+    }
+  }, [idInstance, apiToken, phoneNumber, navigate]);
   useEffect(() => {
     const savedMessages = window.localStorage.getItem("messages");
     if (savedMessages) {

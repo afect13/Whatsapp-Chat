@@ -4,6 +4,7 @@ import LoginForm from "./Pages/LoginForm/LoginForm";
 import PhoneForm from "./Pages/PhoneForm/PhoneForm";
 import Chat from "./Pages/Chat/Chat";
 import { useState } from "react";
+import NotFound from "./Pages/NotFound/NotFound";
 
 function App() {
   const [authData, setAuthData] = useState({ idInstance: "", apiToken: "" });
@@ -17,7 +18,7 @@ function App() {
           element={<PhoneForm authData={authData} phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} />}
         />
         <Route path="chat" element={<Chat authData={authData} phoneNumber={phoneNumber} />} />
-        {/* <Route path="*" element={<NoMatch />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
